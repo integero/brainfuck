@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -60,8 +63,10 @@ public class Brainfuck {
                     break;
                 case '.':
                     result += Character.toString((char) jobArray[memPos]);
+                    break;
                 case ',':
-                    break; // here must be input
+                    jobArray[memPos] = getChar();
+                    break;
                 default:{
                     if (((brainChars[codPos] == '[') && (jobArray[memPos] == 0))||((brainChars[codPos] == ']') && (jobArray[memPos] != 0)))
                         codPos = bracketsPairs.get(codPos);
@@ -71,6 +76,18 @@ public class Brainfuck {
             if (codPos >= brainChars.length) break;
         }
         return result;
+    }
+
+    public static char getChar() {
+        char ch='@';
+        try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+            System.out.print("Input ONE char, please :");
+            ch = (char) br.read();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return ch;
     }
 
     public static void main(String[] args) {
