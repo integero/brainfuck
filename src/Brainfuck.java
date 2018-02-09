@@ -17,31 +17,31 @@ public class Brainfuck {
         // isn't open brackets
         if (pOfoB < 0) return null;
         oB.add(pOfoB);
-        int clBrPos;
-        int opBrPos;
-        boolean closeBracketSearch = true;
+        int clsBrPos=0;
+        int opnBrPos=0;
+        boolean clsBrSearch = true;
         while (true) {
-            if (closeBracketSearch) clBrPos = brainString.indexOf("]", ++clBrPos);
+            if (clsBrSearch) clsBrPos = brainString.indexOf("]", ++clsBrPos);
             // close bracket not found - break
-            if (clBrPos < 0) break;
+            if (clsBrPos < 0) break;
             if (pOfoB >= 0) pOfoB = brainString.indexOf("[", ++pOfoB);
             // there isn't open brackets in brainString
             if (pOfoB < 0) {
-                closeBracketSearch = true;
+                clsBrSearch = true;
                 // adding pairs-positions [] & ][
-                result.put(oB.get(oB.size() - 1), clBrPos);
-                result.put(clBrPos, oB.get(oB.size() - 1));
+                result.put(oB.get(oB.size() - 1), clsBrPos);
+                result.put(clsBrPos, oB.get(oB.size() - 1));
                 oB.remove(oB.size() - 1);
-            } else if (pOfoB < clBrPos) {
-                closeBracketSearch = false;
+            } else if (pOfoB < clsBrPos) {
+                clsBrSearch = false;
                 oB.add(pOfoB);
             } else {
                 // there is open bracket after close.
-                closeBracketSearch = true;
-                opBrPos = oB.get(oB.size() - 1);
+                clsBrSearch = true;
+                opnBrPos = oB.get(oB.size() - 1);
                 // adding pairs-positions with privious found [
-                result.put(opBrPos, clBrPos);
-                result.put(clBrPos, opBrPos);
+                result.put(opnBrPos, clsBrPos);
+                result.put(clsBrPos, opnBrPos);
                 oB.remove(oB.size() - 1);
                 oB.add(pOfoB);
             }
@@ -51,10 +51,14 @@ public class Brainfuck {
 
     public static boolean pair(String brainString) {
         // check the correctness of the brackets
-        Pattern pattern = Pattern.compile("[^\\[\\]]");
-        Matcher matcher = pattern.matcher(brainString);
-        String result = matcher.replaceAll("");
-        char[] brck = result.toCharArray();
+//        Pattern pattern = Pattern.compile("[^\\[\\]]");
+//        Matcher matcher = pattern.matcher(brainString);
+//        String result = Pattern.compile("[^\\[\\]]").matcher(brainString).replaceAll("");
+//        String result = pattern.matcher(brainString).replaceAll("");
+//        String result = matcher.replaceAll("");
+//  retrieval all brackets for valid analyses
+        char[] brck = Pattern.compile("[^\\[\\]]").matcher(brainString).replaceAll("").toCharArray();
+//        char[] brck = result.toCharArray();
         int brCnt = 0;
         for (int i = 0; i < brck.length; i++) {
             if (((brck[i] == '[')?brCnt++:brCnt--)<0) break;
@@ -63,7 +67,7 @@ public class Brainfuck {
 //            else brCnt--;
 //            if (brCnt < 0) break;
         }
-        return (brCnt != 0) ? false : true;
+        return brCnt == 0;
     }
 
     public static String brainfuck(String brainString) {
