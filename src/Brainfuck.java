@@ -62,13 +62,10 @@ public class Brainfuck {
                     result += Character.toString((char) jobArray[memPos]);
                 case ',':
                     break; // here must be input
-                case '[':
-                    if (jobArray[memPos] == 0) codPos = bracketsPairs.get(codPos);
-                    break;
-                case ']':
-                    if (jobArray[memPos] != 0) codPos = bracketsPairs.get(codPos);
-                    break;
-                default:
+                default:{
+                    if (((brainChars[codPos] == '[') && (jobArray[memPos] == 0))||((brainChars[codPos] == ']') && (jobArray[memPos] != 0)))
+                        codPos = bracketsPairs.get(codPos);
+                }
             }
             codPos++;
             if (codPos >= brainChars.length) break;
@@ -79,6 +76,5 @@ public class Brainfuck {
     public static void main(String[] args) {
         String st = "++++++++++[>+++++++>++++++++++>+++>+<<<<-]>++.>+.+++++++..+++.>++.<<+++++++++++++++.>.+++.------.--------.>+.>.";
         System.out.println(brainfuck(st));
-
     }
 }
