@@ -25,7 +25,7 @@ public class Brainfuck {
         Stack<Integer> opnBr = new Stack<>();
         int brcktsPos=-1;
         int tmp;
-//      brackets sequence is well here. It is possible make pairs [] & }{
+//      brackets sequence is well here. It is possible make pairs [] & ][
         for (int i = 0; i < brackets.length; i++) {
             brcktsPos = brainString.indexOf(brackets[i], ++brcktsPos);
             if (brackets[i] == '[')
