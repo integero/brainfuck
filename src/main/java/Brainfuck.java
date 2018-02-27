@@ -1,3 +1,5 @@
+package main.java;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -25,7 +27,7 @@ public class Brainfuck {
         Stack<Integer> opnBr = new Stack<>();
         int brcktsPos=-1;
         int tmp;
-//      brackets sequence is well here. It is possible make pairs [] & }{
+//      brackets sequence is well here. It is possible make pairs [] & ][
         for (int i = 0; i < brackets.length; i++) {
             brcktsPos = brainString.indexOf(brackets[i], ++brcktsPos);
             if (brackets[i] == '[')
@@ -65,7 +67,7 @@ public class Brainfuck {
                     result += Character.toString((char) jobArray[memPos]);
                     break;
                 case ',':
-                    jobArray[memPos] = getChar();
+                    jobArray[memPos] = (int) getChar();
                     break;
                 default:{
                     if (((brainChars[codPos] == '[') && (jobArray[memPos] == 0))||((brainChars[codPos] == ']') && (jobArray[memPos] != 0)))
@@ -78,7 +80,7 @@ public class Brainfuck {
         return result;
     }
 
-    public static char getChar() {
+    private static char getChar() {
         char ch='@';
         try {
             BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
