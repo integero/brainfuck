@@ -1,4 +1,4 @@
-package main.java;
+package com.apach.my;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -79,7 +79,7 @@ public class Brainfuck {
         }
         return result;
     }
-
+//  return first symbol from input or "\n" for empty input
     private static char getChar() {
         char ch='@';
         try {
