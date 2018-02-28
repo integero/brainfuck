@@ -1,4 +1,4 @@
-package com.apach.my;
+package com.apache.my;
 
 import static org.junit.Assert.assertEquals;
 public class BrainfuckTest {

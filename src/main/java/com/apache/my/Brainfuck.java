@@ -1,4 +1,4 @@
-package com.apach.my;
+package com.apache.my;
 
 import java.io.BufferedReader;
 import java.io.IOException;
